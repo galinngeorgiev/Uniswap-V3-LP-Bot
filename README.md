@@ -13,13 +13,12 @@
     are in the subdir /abi.
 
  
-4.  With parameters in global_params.py, the bot initiates 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price)
+4.  With the current parameters in global_params.py, the bot initiates 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price)
     and liquidates them at the end of the session. Also, swaps back to the original amounts. A session lasts for ~ 24 hours.
     The bot has the ability to initiate/liquidate as frequently as possible.
     
-5. The updates of the pool price happen on every iteration, currently run every 10 sec (DELAY_LOOP_SEC = 10).
-     Pool price, p&l and numerous other metrics can be found in the dated log, in the subdir /logs.
-
+5. The updates of the pool price happen on every iteration, currently iteration run every 10 sec (DELAY_LOOP_SEC = 10).
+     Pool price, p&l and numerous other metrics can be found in the date-of-running log, in the subdir /logs.
  
 6. Manual commands to unwind the LP positions (tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity):
   - to completely unwind i.e run all 3 separate functions shown below: python “C:\...\unwind.py" polygon tokenId liquidity
