@@ -5,7 +5,7 @@
   (ROUTER_ADDRESS, for swaps): 0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45 & (NPM_ADDRESS, for LP tx-s): 0xC36442b4a4522E871399CD717aBDD847Ab11FE88
   for an infinite amount: 115792089237316195423570985008687907853269984665640564039457584007913129639935
   
-2. The address has to be specified in global_params.py & the private key to the address is encrypted in a file (under subfolder /accounts)
+2. The address has to be specified in global_params.py & the private key to the address is encrypted in a file (under subdir /accounts)
     with encrypt_file() in encryption.py. When the bot is run, a password to access the private key is required via decrypt_file(),
     run at the beginning of main() in main.py.
   
@@ -13,12 +13,14 @@
 
 
  
-4.  With parameters in global_params.py, the bot initiates 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP)
+4.  With parameters in global_params.py, the bot initiates 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price)
     and liquidates them at the end of the session. Also, swaps back to the original amounts. A session lasts for ~ 24 hours.
     The bot has the ability to initiate/liquidate as frequently as possible.
+    
+5. The updates of the pool price happen on every iteration and poll price, p&l and numerous other metrics can be found in the log under subdir /logs.
 
  
-5. Manual commands to unwind the LP positions (tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity):
+6. Manual commands to unwind the LP positions (tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity):
   - to completely unwind i.e run all 3 separate functions shown below: python “C:\...\unwind.py" polygon tokenId liquidity
   - to only decrease liquidity: python “C:\...\decreaseLiquidity.py" polygon tokenId liquidity
   - to only collect the funds (after decreaseLiquidity() is run): python "C:\...\collect.py" tokenId polygon
