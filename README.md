@@ -5,12 +5,12 @@
   (ROUTER_ADDRESS, for swaps): 0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45 & (NPM_ADDRESS, for LP tx-s): 0xC36442b4a4522E871399CD717aBDD847Ab11FE88
   for an infinite amount: 115792089237316195423570985008687907853269984665640564039457584007913129639935
   
-2. The address has to be specified in global_params.py & the private key to the address is encrypted in a file (in subdir /accounts)
-    with encrypt_file() in encryption.py. When the bot is run, a password to access the private key is required via decrypt_file(),
-    run at the beginning of main() in main.py.
+2. The address has to be specified in global_params.py & the private key to the address is encrypted in a file (in the subdir /accounts)
+    with encrypt_file() in encryption.py. It requires /accounts/salt.txt. When the bot is run, a password to access the private key is required
+    via decrypt_file(),run at the beginning of main() in main.py.
   
-3. The account has to have no NFT-s, in order for the bot to run.
-
+3. The account has to have no NFT-s, in order for the bot to run. The ABI-s of the contracts used (all of them on the blockchain, made by Uniswap)
+    are in the subdir /abi.
 
  
 4.  With parameters in global_params.py, the bot initiates 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price)
@@ -18,7 +18,7 @@
     The bot has the ability to initiate/liquidate as frequently as possible.
     
 5. The updates of the pool price happen on every iteration, currently run every 10 sec (DELAY_LOOP_SEC = 10).
-     Pool price, p&l and numerous other metrics can be found in the log in subdir /logs.
+     Pool price, p&l and numerous other metrics can be found in the dated log, in the subdir /logs.
 
  
 6. Manual commands to unwind the LP positions (tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity):
