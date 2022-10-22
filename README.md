@@ -13,8 +13,8 @@
     are in the subdir /abi.
 
  
-4.  With the current parameters in global_params.py, the bot initiates 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price)
-    and liquidates them at the end of the session. Also, swaps back to the original amounts. A session lasts for ~ 24 hours.
+4.  With the current parameters in global_params.py, the bot initiates NUM_LP = 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price)
+    each with price range sum(LP_DISTANCE_TO_BOUND_PER)=0.5% wide, stacked adjacently, so that the middle LP position has the initiation (current) price at the     middle. The bot liquidates all of them at the end of the session or when the curent price is NUM_LP * 0.5% / 2 away from the initiation price. in the latter      case, the bot initiates NUM_LP new LP positions, as above. Also, the bot swaps back to the original amounts. A session lasts for ~ 24 hours.
     The bot has the ability to initiate/liquidate as frequently as possible.
     
 5. The updates of the pool price happen on every iteration, currently iteration run every 10 sec (DELAY_LOOP_SEC = 10).
