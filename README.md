@@ -14,6 +14,6 @@
   - to completely unwind i.e run all 3 separate functions shown below: python “C:\...\unwind.py" polygon tokenId liquidity
   - to only decrease liquidity: python “C:\...\decreaseLiquidity.py" polygon tokenId liquidity
   - to only collect the funds (after decreaseLiquidity() is run): python "C:\...\collect.py" tokenId polygon
-  - to only burn the NFT corresponding to LP position (after collect() for the full amount is run): python "C:\...\burn.py" tokenId polygon;
+  - to only burn an NFT with a given tokenId: python "C:\...\burn.py" tokenId polygon;
 
   To get the current NFT-s in the account, run: python "C:\...\toolbox.py" polygon address.
