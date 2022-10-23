@@ -1,3 +1,5 @@
+Run (from console): python "C:\...\UniswapV3_LP\main.py" polygon
+
 1. Need approval: contrary to claims of non-expiry, approval seems to expire once a month - without approval the tx-s receive error (seen on polygonscan.com) 'STF': 'safeTransfer can not be completed'! Under polygonscan.com > WETH ('0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619') & USDC ('0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'), under Contract > Write > Approve (connect to my wallet), approve manually both (ROUTER_ADDRESS, for swaps): 0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45 & (NPM_ADDRESS, for LP tx-s): 0xC36442b4a4522E871399CD717aBDD847Ab11FE88 for an infinite amount: 115792089237316195423570985008687907853269984665640564039457584007913129639935
   
 2. The address has to be specified in global_params.py & the private key to the address is encrypted in a file (in the subdir /accounts) with encrypt_file() in encryption.py. It requires /accounts/salt.txt. When the bot is run, a password to access the private key is required via decrypt_file(),run at the beginning of main() in main.py.
@@ -10,9 +12,9 @@
 5. The updates of the pool price (and therefore all tx-s) happen on every 'main iteration', currently run every DELAY_LOOP_SEC (= 1) seconds. Pool price, p&l and numerous other metrics can be found in the date-of-running log, in the subdir /logs.
  
 6. Manual commands to unwind the LP positions (tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity):
-  - to completely unwind i.e run all 3 separate functions shown below: python “C:\...\unwind.py" polygon tokenId liquidity
-  - to only decrease liquidity: python “C:\...\decreaseLiquidity.py" polygon tokenId liquidity
-  - to only collect the funds (after decreaseLiquidity() is run): python "C:\...\collect.py" tokenId polygon
-  - to only burn an NFT with a given tokenId: python "C:\...\burn.py" tokenId polygon;
+  - to completely unwind i.e run all 3 separate functions shown below: python “C:\...\UniswapV3_LP\unwind.py" polygon tokenId liquidity
+  - to only decrease liquidity: python “C:\...\UniswapV3_LP\decreaseLiquidity.py" polygon tokenId liquidity
+  - to only collect the funds (after decreaseLiquidity() is run): python "C:\...\UniswapV3_LP\collect.py" tokenId polygon
+  - to only burn an NFT with a given tokenId: python "C:\...\UniswapV3_LP\burn.py" tokenId polygon;
 
-  To get the current NFT-s in the account, run: python "C:\...\toolbox.py" polygon address.
+  To get the current NFT-s in the account, run: python "C:\...\UniswapV3_LP\toolbox.py" polygon address.
