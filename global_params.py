@@ -35,7 +35,7 @@ else:
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.25, 0.25] #[0.2, 0.2]
-	UNWIND_DIST_TO_BOUND_PER = - NUM_LP * 100 #-10000 #5 #N.B. Unwind all NUM_LP tx-s if < min(dist-to-lower-bound, dist-to-upper-bound) is lower!
+	UNWIND_DIST_TO_BOUND_PER = - 2 * NUM_LP * 100 #-10000 #5 #N.B. Unwind all NUM_LP tx-s if < min(dist-to-lower-bound, dist-to-upper-bound) is lower!
 	INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
 	HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
 	STOP_LOSS_BP, STOP_PROFIT_BP = 1000, 1000
