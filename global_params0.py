@@ -30,21 +30,21 @@ if TEST:
 	MAX_PRICE_RETURN_PER = 10000000
 	#PRICE_MAD_WAIT_TIME_MIN = 0
 else:
-	NUM_LP, RUNTIME_SEC = 3, 3600 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+	NUM_LP, RUNTIME_SEC = 5, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 	MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP = 10, 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.25, 0.25] #[0.2, 0.2]
 	UNWIND_DIST_TO_BOUND_PER = - 2 * (NUM_LP + 1) * 100 #-10000 #5 #N.B. Unwind all NUM_LP tx-s if < min(dist-to-lower-bound, dist-to-upper-bound) is lower!
-	INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
-	HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
+	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
+	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
 	STOP_LOSS_BP, STOP_PROFIT_BP = 1000, 1000
-	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000 #2000, 50
-	PRICE_MAD = [10000., 10000., 10000.] #[0.0001, 0.00015, 0.0002] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
-	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 0., 10000 #0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
-	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 0, 0 #150, 5 
+	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
+	PRICE_MAD = [10000., 10000., 10000.] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
+	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 0.04, 10000 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
+	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 150, 5 
 	MIN_POOL_LIQUIDITY_PER = [50, 50] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
-	LP_SWAP, LP_SWAP_DISTANCE_TO_BOUND_PER = False, [0.1, 0.05] #N.B. Execute swaps with LP; not working properly because the market needs to be 'chased'!
+	#LP_SWAP, LP_SWAP_DISTANCE_TO_BOUND_PER = False, [0.1, 0.05] #N.B. Execute swaps with LP; not working properly because the market needs to be 'chased'!
 	MIN_SESSION_SWAP_PER, MIN_TX_SWAP_PER, SWAP_EPSILON_PER = 10, 10000, 5 #N.B. execute swaps only if abs(amount_to_swap) >
 	#DECREASE_ONLY_UNWIND_DIST_TIME_MIN = 30 #N.B.
 	#SWAP_FLOW_THRESHOLD_PER = 30
