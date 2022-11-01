@@ -30,13 +30,13 @@ if TEST:
 	MAX_PRICE_RETURN_PER = 10000000
 	#PRICE_MAD_WAIT_TIME_MIN = 0
 else:
-	NUM_LP, RUNTIME_SEC = 3, 600 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+	NUM_LP, RUNTIME_SEC = 5, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 	assert NUM_LP % 2 == 1
 	NUM_TOKEN0_LP, NUM_TOKEN1_LP = 10, 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
-	UNWIND_DIST_TO_BOUND_PER = [(-1.50, -1.50), (-1.50, -1.50), (-1.50, -1.50)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+	UNWIND_DIST_TO_BOUND_PER = [(-1.50, -1.50), (-1.50, -1.50), (-1.50, -1.00), (-1.50, -1.00), (-1.50, -1.00)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
@@ -46,12 +46,12 @@ else:
 	STOP_LOSS_BP, STOP_PROFIT_BP = 1000, 1000
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000 #2000, 50
 	PRICE_MAD = [10000., 10000., 10000.] #[0.0001, 0.00015, 0.0002] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
-	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 0., 10000 #0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
-	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 0, 0 #150, 5 
+	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 0.04, 10000 #0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
+	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 150, 5 
 	MIN_POOL_LIQUIDITY_PER = [50, 50] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
-	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 1.5, 0.05, 0.2, 2 #N.B. Execute swaps with LP;
+	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.05, 0.2, 2 #N.B. Execute swaps with LP;
 	assert LP_SWAP_UNWIND_DISTANCE_PER /  LP_SWAP_DISTANCE_TO_BOUND_PER >= 4
-	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 1000000, 10, 0 #N.B. execute swaps only if abs(amount_to_swap_token0) >
+	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 1000000, 10, 10 #N.B. execute swaps only if abs(amount_to_swap_token0) >
 	assert MIN_SESSION_SWAP_PER * MIN_TX_BATCH_SWAP_PER > 1000000 #N.B. Only one swap type is allowed: either session or tx batch!
 	#DECREASE_ONLY_UNWIND_DIST_TIME_MIN = 30 #N.B.
 	#SWAP_FLOW_THRESHOLD_PER = 30
