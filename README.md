@@ -1,6 +1,6 @@
 Run (from console): python "C:\...\UniswapV3_LP\main.py" polygon
 
-0. ETH is a p&l benchmark. Bot trading is on Uniswap v3 liquid token0/WETH (token0 usually stable coin). Addresses of tokens and pools are set up in global_params.py. Token0 is borrowed on Aave (that is why 'borrow p&l is used), using WETH as a collateral. Borrow p&l of an LP position has 3 summands: i) LP fees >= 0; ii) Rebalancing Loss (RL, a.k.a. Impermanent Loss) <= 0; iii) out-of-the-money (OTM) Loss <= 0. 
+0. ETH is a p&l benchmark. Bot trading is on Uniswap v3 liquid pools token0/WETH (token0 usually stable coin). Addresses of tokens and pools are set up in global_params.py. Token0 is borrowed on Aave (that is why 'borrow p&l' is used), using ETH as a collateral. Borrow p&l of an LP position has 3 summands: i) LP fees >= 0; ii) Rebalancing Loss (RL, a.k.a. Impermanent Loss) <= 0; iii) out-of-the-money (OTM) Loss <= 0. 
   - When current ETH price < LP price, the borrowed token0 rebalances into WETH i.e. the 'borrow' gets back into the collateral. This rebalancing causes RL & OTM Loss, so when the benchmark is ETH, the latter are both zero. That is why the bot LP positions are stacked to the 'left' of the current ETH price.
   - When current ETH price > LP price, WETH rebalances into token0. Because the benchmark is not token0 (cash) or ETH is not borrowed (collaterilized by token0), both RL & OTM Loss do not disappear & are substancial.
   
