@@ -1,10 +1,10 @@
 Run (from console): python "C:\...\UniswapV3_LP\main.py" polygon
 
 0. ETH is a p&l benchmark. Bot trading is on Uniswap v3 liquid pools token0/WETH (token0 usually stable coin). Addresses of tokens and pools are set up in global_params.py. Token0 is borrowed on Aave (that is why 'borrow p&l' is used), using ETH as a collateral. Borrow p&l of an LP position has 3 summands: i) LP fees >= 0; ii) Rebalancing Loss (RL, a.k.a. Impermanent Loss) <= 0; iii) out-of-the-money (OTM) Loss <= 0.
-1. 
-  i) When current ETH price < LP price, the borrowed token0 rebalances into WETH i.e. the 'borrow' gets back into the collateral. This rebalancing causes RL & OTM Loss, so when the benchmark is ETH, the latter are both zero. That is why the bot LP positions are stacked to the 'left' of the current ETH price.
+
+    i) When current ETH price < LP price, the borrowed token0 rebalances into WETH i.e. the 'borrow' gets back into the collateral. This rebalancing causes RL & OTM Loss, so when the benchmark is ETH, the latter are both zero. That is why the bot LP positions are stacked to the 'left' of the current ETH price.
   
-  ii) When current ETH price > LP price, WETH rebalances into token0. Because the benchmark is not token0 (cash) or ETH is not borrowed (collaterilized by token0), both RL & OTM Loss do not disappear & are substancial.
+    ii) When current ETH price > LP price, WETH rebalances into token0. Because the benchmark is not token0 (cash) or ETH is not borrowed (collaterilized by token0), both RL & OTM Loss do not disappear & are substancial.
   
 2. Need approval: contrary to claims of non-expiry, approval seems to expire once a month - without approval the tx-s receive error (seen on polygonscan.com) 'STF': 'safeTransfer can not be completed'! Under polygonscan.com > WETH ('0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619') & USDC ('0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174'), under Contract > Write > Approve (connect to my wallet), approve manually both (ROUTER_ADDRESS, for swaps): 0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45 & (NPM_ADDRESS, for LP tx-s): 0xC36442b4a4522E871399CD717aBDD847Ab11FE88 for an infinite amount: 115792089237316195423570985008687907853269984665640564039457584007913129639935
   
