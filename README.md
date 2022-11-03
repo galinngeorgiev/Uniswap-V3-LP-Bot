@@ -23,7 +23,7 @@ Parameters in global_params.py (all global variables are capitalized): the bot i
 
 Parameters in global_params0.py (if use, rename to global_params.py): the bot initiates NUM_LP = 1 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price), with price range 2 * LP_DISTANCE_TO_BOUND_PER[0]  wide, with initiation (current) price immediately above its right price bound. But the bot liquidates/initiates frequently (every ~ 1-20 minutes). Unwinding happens typically because signed WETH / pool_liquidity in the last DELAY_LOOP_SEC (= 1) second exceeds MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP. 
 
-Also, the bot swaps back (see flag LP_SWAP below): i) to the session original amounts, if MIN_SESSION_SWAP_PER is small enough; ii) to the NUM_LP LP tx-s total original amounts, if MIN_TX_BATCH_SWAP_PER is small enough; 
+After an LP tx is fully roundtripped (after mint(), dereaseLiquidity(), collect(), burn()), the bot swaps back (see flag LP_SWAP below): i) to the session original amounts, if MIN_SESSION_SWAP_PER is small enough; ii) to the NUM_LP LP tx-s total original amounts, if MIN_TX_BATCH_SWAP_PER is small enough; 
     
 5. The updates of the pool price (and therefore all tx-s) happen on every 'main iteration', currently run every DELAY_LOOP_SEC (= 1) seconds. Pool price, p&l and numerous other metrics can be found in the date-of-running log, in the subdir /logs.
 
