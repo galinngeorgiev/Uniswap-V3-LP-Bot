@@ -19,16 +19,18 @@ The bot LP positions are stacked to the 'left' of the current ETH price, so they
  
 4. A session lasts for RUNTIME_SEC (=72000 iterations currently i.e. when  ~ 24 hours when DELAY_LOOP_SEC = 1).  
 
-Parameters in global_params.py (all global variables are capitalized): the bot initiates NUM_LP = 5 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price), each with price range 2 * LP_DISTANCE_TO_BOUND_PER wide, stacked adjacently to the left of the initiation (current) price. The bot liquidates them at the end of the session or when they are UNWIND_DISTANCE_TO_BOUND_PER  OTM. In the latter case, the bot replacesthe old LP position with a new LP position, but only when all LP positions are liquidated. Also, the bot swaps back to the original amounts when the extra amounts exceed MIN_SESSION_SWAP_PER of the total invested. If LP_SWAP = True, bot attempts to swap using LP (no slippage & and pool fee costs).
+Parameters in global_params.py (all global variables are capitalized): the bot initiates NUM_LP = 5 LP positions for a total ~ $10 = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price), each with price range 2 * LP_DISTANCE_TO_BOUND_PER wide, stacked adjacently to the left of the initiation (current) price. The bot liquidates them at the end of the session or when they are UNWIND_DISTANCE_TO_BOUND_PER  OTM. In the latter case, the bot replaces the old LP position with a new LP position, but only when all LP positions are liquidated. 
 
-Parameters in global_params0.py (if use, rename to global_params.py): the bot initiates NUM_LP = 1 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price), with price range 2 * LP_DISTANCE_TO_BOUND_PER[0]  wide, with initiation (current) price immediately above its right price bound. But the bot liquidates/initiates frequently (every ~ 1-20 minutes). Unwinding happens typically because abs(signed WETH) / pool_liquidity in the last DELAY_LOOP_SEC (= 1) second exceeds MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP. Also, the bot swaps back to the original amounts when the extra amounts exceed MIN_SESSION_SWAP_PER of the total invested. If LP_SWAP = True, bot attempts to swap using LP (no slippage & and pool fee costs).
+Parameters in global_params0.py (if use, rename to global_params.py): the bot initiates NUM_LP = 1 LP positions ~$10 each = min(MAX_NUM_TOKEN0_LP, MAX_NUM_TOKEN1_LP * ETH price), with price range 2 * LP_DISTANCE_TO_BOUND_PER[0]  wide, with initiation (current) price immediately above its right price bound. But the bot liquidates/initiates frequently (every ~ 1-20 minutes). Unwinding happens typically because signed WETH / pool_liquidity in the last DELAY_LOOP_SEC (= 1) second exceeds MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP. 
+
+Also, the bot swaps back (see flag LP_SWAP below): i) to the session original amounts, if MIN_SESSION_SWAP_PER is small enough; ii) to the NUM_LP LP tx-s total original amounts, if MIN_TX_BATCH_SWAP_PER is small enough; 
     
 5. The updates of the pool price (and therefore all tx-s) happen on every 'main iteration', currently run every DELAY_LOOP_SEC (= 1) seconds. Pool price, p&l and numerous other metrics can be found in the date-of-running log, in the subdir /logs.
 
-6. When a blockchain tx fails MAX_ATTEMPTS_FAILED_TX ( 5 currently), the bot stops, so outstading mints have to be unwond manually - see below.
+6. When a blockchain tx fails MAX_ATTEMPTS_FAILED_TX ( 5 currently), the bot stops, so outstading mints have to be unwound manually - see below.
 
 7. A global flag LP_SWAP = True: attempts LP_SWAP_MAX_ATTEMPTS_FAILED_TX times (currently 2) to avoid pool fee & slippage by swapping via LP position (with the tightest possible price range). When LP_SWAP:
-    i) the runtime may increase to max LP_SWAP_MULT_RUNTIME * RUNTIME_SEC (currently 2 * RUNTIME_SEC)
+    i) the runtime may increase to max LP_SWAP_MULT_RUNTIME * RUNTIME_SEC (currently 2 * RUNTIME_SEC);
    ii) when LP swap fails LP_SWAP_MAX_ATTEMPTS_FAILED_TX times or the extended end LP_SWAP_MULT_RUNTIME * RUNTIME_SEC is reached, conventional (non-LP) swap is executed.
  
 8. Manual commands to unwind the LP positions:
