@@ -27,7 +27,7 @@ Parameters in global_params0.py (if use, rename to global_params.py): the bot in
 
 6. When a blockchain tx fails MAX_ATTEMPTS_FAILED_TX ( 5 currently), the bot stops, so outstading mints have to be unwond manually - see below.
 
-7. LP_SWAP = True: attempts LP_SWAP_MAX_ATTEMPTS_FAILED_TX times (currently 2) to avoid pool fee & slippage by swapping via LP position (with the tightest possible price range). When LP_SWAP:
+7. A global flag LP_SWAP = True: attempts LP_SWAP_MAX_ATTEMPTS_FAILED_TX times (currently 2) to avoid pool fee & slippage by swapping via LP position (with the tightest possible price range). When LP_SWAP:
     i) the runtime may increase to max LP_SWAP_MULT_RUNTIME * RUNTIME_SEC (currently 2 * RUNTIME_SEC)
    ii) when LP swap fails LP_SWAP_MAX_ATTEMPTS_FAILED_TX times or the extended end LP_SWAP_MULT_RUNTIME * RUNTIME_SEC is reached, conventional (non-LP) swap is executed.
  
