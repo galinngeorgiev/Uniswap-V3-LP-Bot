@@ -60,7 +60,7 @@ else:
 	MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 2, 10
 	SLIPPAGE_PER, MAX_SLIPPAGE_PER = 1, 5 #N.B. If slippage is too low, get error 'Too little received'
 	DELAY_LOOP_SEC = 1
-	EXPIRY_SEC, TIMEOUT_SEC = 60, 60 #N.B. 1st is used for expiryDate in mint, decreaseLiquidity; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
+	EXPIRY_SEC, TIMEOUT_SEC = 30, 900 #N.B. 1st is used for expiryDate in mint, decreaseLiquidity, swap; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
 	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 3000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 	#N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
 	MAX_TX_IX, MIN_TOKEN1_QUANTITY = 10000, 0.05 #min block position, min token1 quantity of tx when computing current pool price
@@ -135,8 +135,8 @@ POOL_ADDRESS_MUMBAI, POOL_FEE_MUMBAI = '0xc1FF5D622aEBABd51409e01dF4461936b0Eb4E
 
 ############################################
 #addresses of Uniswap deployed contracts are listed in https://docs.uniswap.org/protocol/reference/deployments & are the same for all nets
-#ROUTER_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564' #SwapRouter.sol 
-ROUTER_ADDRESS = '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45' #SwapRouter02.sol
+ROUTER_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564' #SwapRouter.sol 
+#ROUTER_ADDRESS = '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45' #SwapRouter02.sol: does not have a deadline, which is needed to cancel the swap!
 NPM_ADDRESS = '0xC36442b4a4522E871399CD717aBDD847Ab11FE88' #NonfungiblePositionManager.sol
 
 
