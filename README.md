@@ -29,7 +29,7 @@ After an LP tx is fully roundtripped (after mint(), dereaseLiquidity(), collect(
 
 6. When a blockchain tx fails MAX_ATTEMPTS_FAILED_TX ( 5 currently), the bot stops, so outstading mints have to be unwound manually - see below.
 
-7. A global flag LP_SWAP = True: attempts LP_SWAP_MAX_ATTEMPTS_FAILED_TX times (currently 2) to avoid pool fee & slippage by swapping via LP position (with the tightest possible price range). LP tx-s are positioned so that always WETH rebalances into borrowed token0 (ETH does not rebalance into unborrwoed token0). So, when the benchmark is ETH, for an LP swap, both RL & OTM Loss = 0 in a 'borrow p&l' on a relative to ETH scale! When LP_SWAP:
+7. A global flag LP_SWAP = True: attempts LP_SWAP_MAX_ATTEMPTS_FAILED_TX times (currently 2) to avoid pool fee & slippage by swapping via LP position (with the tightest possible price range). LP tx-s are positioned so that always WETH rebalances into borrowed token0 (ETH does not rebalance into unborrwoed token0). So, when the benchmark is ETH, for an LP swap, both RL & OTM Loss = 0 in a 'borrow p&l' on a relative to ETH scale: therefore LP swap can remain as an open LP position fo a long time! When LP_SWAP:
     i) the runtime may increase to max LP_SWAP_MULT_RUNTIME * RUNTIME_SEC (currently 2 * RUNTIME_SEC);
    ii) when LP swap fails LP_SWAP_MAX_ATTEMPTS_FAILED_TX times or the extended end LP_SWAP_MULT_RUNTIME * RUNTIME_SEC is reached, conventional (non-LP) swap is executed.
  
