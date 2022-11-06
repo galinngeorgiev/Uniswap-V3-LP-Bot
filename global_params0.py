@@ -35,8 +35,8 @@ else:
 	NUM_TOKEN0_LP, NUM_TOKEN1_LP = 10, 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
-	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
-	UNWIND_DIST_TO_BOUND_PER = [(-0.01, -0.01)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+	LP_DISTANCE_TO_BOUND_PER = [0.2, 0.2] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
+	UNWIND_DIST_TO_BOUND_PER = [(-0.2, -0.2)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
