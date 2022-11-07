@@ -34,6 +34,8 @@ After an LP tx is fully roundtripped (after mint(), dereaseLiquidity(), collect(
    ii) when LP swap fails LP_SWAP_MAX_ATTEMPTS_FAILED_TX times or the extended end LP_SWAP_MULT_RUNTIME * RUNTIME_SEC is reached, conventional (non-LP) swap is executed.
  
 8. Manual commands to unwind the LP positions:
+
+  - NFT-s in the address: python "C:\Users\galin.georgiev\GammaDynamics Net\Dev\Python\UniswapV3_LP\toolbox.py" polygon address (without quotes)
   - to completely unwind (a mint) tx. tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity. One command runs all 3 separate functions (decreaseLiquidity(), collect() and burn()): python “C:\...\UniswapV3_LP\unwind.py" polygon tokenId liquidity
   - to only decrease liquidity. tokenID & liquidity are required (see above): python “C:\...\UniswapV3_LP\decreaseLiquidity.py" polygon tokenId liquidity
   - to only collect the funds (after decreaseLiquidity() is run). tokenId is required: python "C:\...\UniswapV3_LP\collect.py" tokenId polygon
