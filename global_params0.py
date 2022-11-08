@@ -35,21 +35,21 @@ else:
 	NUM_TOKEN0_LP, NUM_TOKEN1_LP = 10, 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
-	LP_DISTANCE_TO_BOUND_PER = [0.2, 0.2] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
-	UNWIND_DIST_TO_BOUND_PER = [(-0.2, -0.2)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
+	UNWIND_DIST_TO_BOUND_PER = [(-0.15, -0.15)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
 		assert min([-UNWIND_DIST_TO_BOUND_PER[0][1], -UNWIND_DIST_TO_BOUND_PER[-1][0]]) >= NUM_LP * 2 * max(LP_DISTANCE_TO_BOUND_PER)
 	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
 	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
-	STOP_LOSS_BP, STOP_PROFIT_BP = 3, 3
+	STOP_LOSS_BP, STOP_PROFIT_BP = 25, 25
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 2000, 50
 	PRICE_MAD = [0.0001, 0.00015, 0.0002] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
 	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
 	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 150, 5 
 	MIN_POOL_LIQUIDITY_PER = [99, 95] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
-	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = False, 2, 0.05, 0.25, 2 #N.B. Execute swaps with LP;
+	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = False, 2, 0.1, 0.25, 2 #N.B. Execute swaps with LP;
 	assert LP_SWAP_UNWIND_DISTANCE_PER /  LP_SWAP_DISTANCE_TO_BOUND_PER >= 5
 	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 100, 1000000, 10 #N.B. execute swaps only if abs(amount_to_swap_token0) >
 	assert MIN_SESSION_SWAP_PER * MIN_TX_BATCH_SWAP_PER > 1000000 #N.B. Only one swap type is allowed: either session or tx batch!
@@ -77,7 +77,7 @@ assert MAX_CARDINALITY_LIST > NUM_OBSERVATIONS_MEDIAN
 #N.B. US market Open and Close and US macro-economic announcements (8:30 EDT) are quiet hours
 #N.B. i) higher LP_distance_to_bound from beginning to end of quiet hours
 #N.B. ii) do not initiate & unwind positions during quiet hours: https://docs.python.org/3/library/time.html#functions
-QUIET_HOURS_START, QUIET_HOURS_END = [14, 19], [20, 20]
+QUIET_HOURS_START, QUIET_HOURS_END = [14, 20], [14, 20]
 assert len(QUIET_HOURS_START) == len(QUIET_HOURS_END)
 DELAY_NONCE_SEC = 3
 DELAY_REQUEST_SEC = 10
