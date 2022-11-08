@@ -43,7 +43,7 @@ else:
 		assert min([-UNWIND_DIST_TO_BOUND_PER[0][1], -UNWIND_DIST_TO_BOUND_PER[-1][0]]) >= NUM_LP * 2 * max(LP_DISTANCE_TO_BOUND_PER)
 	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
 	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
-	STOP_LOSS_BP, STOP_PROFIT_BP = 1000, 1000
+	STOP_LOSS_BP, STOP_PROFIT_BP = 50, 50
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000 #2000, 50
 	PRICE_MAD = [10000., 10000., 10000.] #[0.0001, 0.00015, 0.0002] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
 	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 0.04, 10000 #0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
