@@ -31,7 +31,6 @@ if TEST:
 	#PRICE_MAD_WAIT_TIME_MIN = 0
 else:
 	NUM_LP, RUNTIME_SEC = 4, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
-	assert NUM_LP % 2 == 1
 	NUM_TOKEN0_LP, NUM_TOKEN1_LP = 10, 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
