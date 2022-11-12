@@ -30,12 +30,12 @@ if TEST:
 	MAX_PRICE_RETURN_PER = 10000000
 	#PRICE_MAD_WAIT_TIME_MIN = 0
 else:
-	NUM_LP, RUNTIME_SEC = 4, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+	NUM_LP, RUNTIME_SEC = 5, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 	NUM_TOKEN0_LP, NUM_TOKEN1_LP = 10, 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
-	UNWIND_DIST_TO_BOUND_PER = [(-1.50, -1.50), (-1.50, -1.00), (-1.50, -1.00), (-1.50, -1.00)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+	UNWIND_DIST_TO_BOUND_PER = [(-1.50, -1.50), (-1.50, -1.50), (-1.50, -1.00), (-1.50, -1.00), (-1.50, -1.00)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
