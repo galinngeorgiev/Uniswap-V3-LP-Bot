@@ -40,7 +40,7 @@ else:
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
-		assert min([-UNWIND_DIST_TO_BOUND_PER[0][1], -UNWIND_DIST_TO_BOUND_PER[-1][0]]) >= NUM_LP * 2 * max(LP_DISTANCE_TO_BOUND_PER)
+        	assert -UNWIND_DIST_TO_BOUND_PER[0][1] >= (NUM_LP - 1) * sum(LP_DISTANCE_TO_BOUND_PER)
 	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
 	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
 	STOP_LOSS_BP, STOP_PROFIT_BP = 25, 25
