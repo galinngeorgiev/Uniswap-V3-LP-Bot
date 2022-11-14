@@ -77,7 +77,7 @@ assert MAX_CARDINALITY_LIST > NUM_OBSERVATIONS_MEDIAN
 #N.B. US market Open and Close and US macro-economic announcements (8:30 EDT) are quiet hours
 #N.B. i) higher LP_distance_to_bound from beginning to end of quiet hours
 #N.B. ii) do not initiate & unwind positions during quiet hours: https://docs.python.org/3/library/time.html#functions
-QUIET_HOURS_START, QUIET_HOURS_END = [14, 20], [14, 20]
+QUIET_HOURS_START, QUIET_HOURS_END = [5, 12], [7, 13]
 assert len(QUIET_HOURS_START) == len(QUIET_HOURS_END)
 PERIOD_CURRENT_LP_POSITIONS_ITERATIONS = 10
 DELAY_NONCE_SEC = 3
