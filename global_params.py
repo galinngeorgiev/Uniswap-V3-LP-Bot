@@ -37,11 +37,11 @@ else:
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
 	#N.B. Valid for LP_position_to_init_price = 1; if LP_position_to_init_price = -1, index of tuples have to reverted!
-	UNWIND_DIST_TO_BOUND_PER = [(-1.70, -0.05), (-1.40, -0.05), (-1.10, -0.05), (-0.80, -0.05), (-0.50, -0.05)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+	UNWIND_DIST_TO_BOUND_PER = [(-0.50, -0.05), (-0.80, -0.05), (-1.10, -0.05), (-1.40, -0.05), (-1.70, -0.05)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; smaller UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
-        	assert -UNWIND_DIST_TO_BOUND_PER[0][0] >= (NUM_LP - 1) * 2 * max(LP_DISTANCE_TO_BOUND_PER) #N.B. Assure that there is no immediate unwinding!
+        	assert -UNWIND_DIST_TO_BOUND_PER[-1][0] >= (NUM_LP - 1) * 2 * max(LP_DISTANCE_TO_BOUND_PER) #N.B. Assure that there is no immediate unwinding!
 	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
 	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
 	STOP_LOSS_BP, STOP_PROFIT_BP = 50, 50
