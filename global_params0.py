@@ -86,6 +86,11 @@ DELAY_REQUEST_SEC = 10
 EPSILON = 0.0001 #N.B. Used in asset_ratio_01
 
 ############################################
+#time
+import time, datetime
+MAX_UNIXTIME = time.mktime(datetime.datetime(2099, 12, 31, 23, 59).timetuple())
+
+############################################
 #Encryption
 SALT_SIZE =16
 
