@@ -4,7 +4,7 @@ TEST = False
 
 if TEST:
 	NUM_LP, RUNTIME_SEC, INIT_LP_POSITION_TO_INIT_PRICE = 1, 60, -1
-	NUM_TOKEN0_LP  = 1
+	NUM_INVESTED_TOKEN1_LP  = 0.01
 	LP_DISTANCE_TO_BOUND_PER = [50, 70]
 	UNWIND_DIST_TO_BOUND_PER = [(10, 10)]
 	#INCREASE_LIQUIDITY = False
@@ -32,7 +32,7 @@ if TEST:
 else:
 	#N.B. NUM_LP >> 0 for the same total price range is beneficial because LP fee is convex & RL is concave: see Google docs > Crypto > Defi Swaps > Uniswap > LP > V3 price ranges: https://docs.google.com/document/d/1K83HF3-A9NqFKtjF-wcf6Kduz0r-J0yYchiyOCfaKgo/edit
 	NUM_LP, RUNTIME_SEC, INIT_LP_POSITION_TO_INIT_PRICE = 5, 72000, -1 #N.B. Running time of the loop (loop runs longer because tx executions take time)
-	NUM_TOKEN0_LP = 10
+	NUM_INVESTED_TOKEN1_LP = 0.1
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
