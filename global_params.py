@@ -83,7 +83,7 @@ assert len(QUIET_HOURS_START) == len(QUIET_HOURS_END)
 PERIOD_CURRENT_LP_POSITIONS_ITERATIONS = 10
 DELAY_NONCE_SEC = 3
 DELAY_REQUEST_SEC = 10
-EPSILON, EPSILON_COLLECTED_TOKEN0 = 0.0001, 10 #N.B. 1st used in asset_ratio_01; 2-nd used in determining amountX_LP[j]
+EPSILON = 0.0001 #N.B. used in asset_ratio_01
 
 ############################################
 #Encryption
