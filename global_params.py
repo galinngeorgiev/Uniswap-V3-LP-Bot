@@ -37,24 +37,24 @@ else:
 	##UNWIND_ASSET_RATIO_PER = 80
 	LP_DISTANCE_TO_BOUND_PER = [0.15, 0.15] #2-nd is for begining-to-end of quiet hours, 1-st otherwise!
 	#N.B. Valid for LP_position_to_init_price = 1; if LP_position_to_init_price = -1, index of tuples have to reverted!
-	UNWIND_DIST_TO_BOUND_PER = [(-0.50, -0.05), (-0.80, -0.05), (-1.10, -0.05), (-1.40, -0.05), (-1.70, -0.05)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+	UNWIND_DIST_TO_BOUND_PER = [(-0.60, -0.0), (-1.00, -0.0), (-1.40, -0.0), (-1.80, -0.0), (-2.20, -0.0)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 	#N.B. Make sure that LP tx does not unwind immediately!
 	if NUM_LP > 1:
         	assert -UNWIND_DIST_TO_BOUND_PER[-1][0] >= (NUM_LP - 1) * 2 * max(LP_DISTANCE_TO_BOUND_PER) #N.B. Assure that there is no immediate unwinding!
-	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
-	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
-	STOP_LOSS_BP, STOP_PROFIT_BP = 50, 50
+	INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
+	HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
+	STOP_LOSS_BP, STOP_PROFIT_BP = 3, 10
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000 #2000, 50
-	PRICE_MAD = [10000., 0., 0.001] #[0.0001, 0.00015, 0.0002] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
-	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = -10000., 10000. #0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
+	PRICE_MAD = [10000., 0., 0.0004] #[0.0001, 0.00015, 0.0002] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is min for unwinding the LP position
+	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = -10000., 0.04 #0.04, 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
 	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 0, 0 #150, 5 
-	MIN_POOL_LIQUIDITY_PER = [50, 50] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
+	MIN_POOL_LIQUIDITY_PER = [50, 80] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
 	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.25, 0.5, 2 #N.B. Execute swaps with LP;
 	assert LP_SWAP_UNWIND_DISTANCE_PER /  LP_SWAP_DISTANCE_TO_BOUND_PER >= 2
 	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 20, 10, 5 #N.B. execute swaps only if abs(amount_to_swap_token0) > SWAP_EPSILON_PER / 100  * sum(tx_borrow_invested_token1) * price
 	#N.B. Make sure there is no token0 outstanding (after LP is collected) and causing  token0 collected p&l
-    	assert MIN_TX_BATCH_SWAP_PER / 100 < NUM_INVESTED_TOKEN1_LP / NUM_LP
+    	assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
 	#DECREASE_ONLY_UNWIND_DIST_TIME_MIN = 30 #N.B.
 	#SWAP_FLOW_THRESHOLD_PER = 30
 	MAX_ATTEMPS_FAILED_TX = 5
@@ -65,7 +65,7 @@ else:
 	#N.B. If tx-s are pending too long, they usualy fail with  'Transaction too old'
 	#N.B. EXPIRY_SEC < 10 results usually in error 'Transaction too old'
 	EXPIRY_SEC, TIMEOUT_SEC = 60, 60 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
-	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 3000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
+	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 	#N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
 	MAX_TX_IX, MIN_TOKEN1_QUANTITY = 10000, 0.05 #min block position, min token1 quantity of tx when computing current pool price
 	MAX_PRICE_RETURN_PER = 1 #N.B. used in current_pool_price(): larger numbers result is bad prices! 
