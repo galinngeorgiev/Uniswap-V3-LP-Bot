@@ -179,4 +179,4 @@ API_KEY_POLYGONSCAN = '6MSYSPDNI98ABGVETDTI4QVPZN33DG1674'
 
 ##############################################
 
-DATA_PATH = 'C:\\Users\\galin.georgiev\\GammaDynamics Net\\Dev\\Python\\UniswapV3_LP'
+DATA_PATH = '...\\UniswapV3_LP'
