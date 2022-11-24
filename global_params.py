@@ -143,8 +143,8 @@ POOL_ADDRESS_MUMBAI, POOL_FEE_MUMBAI = '0xc1FF5D622aEBABd51409e01dF4461936b0Eb4E
 
 ############################################
 #addresses of Uniswap deployed contracts are listed in https://docs.uniswap.org/protocol/reference/deployments & are the same for all nets
-#ROUTER_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564' #SwapRouter.sol 
-ROUTER_ADDRESS = '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45' #SwapRouter02.sol: does not have a deadline, which is needed to cancel the swap!
+ROUTER_ADDRESS = '0xE592427A0AEce92De3Edee1F18E0157C05861564' #SwapRouter.sol 
+#ROUTER_ADDRESS = '0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45' #SwapRouter02.sol: does not have a deadline, which is needed to cancel the swap!
 NPM_ADDRESS = '0xC36442b4a4522E871399CD717aBDD847Ab11FE88' #NonfungiblePositionManager.sol
 
 
