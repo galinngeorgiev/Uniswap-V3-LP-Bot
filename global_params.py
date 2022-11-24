@@ -53,7 +53,7 @@ else:
 	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.25, 0.5, 2 #N.B. Execute swaps with LP;
 	assert LP_SWAP_UNWIND_DISTANCE_PER /  LP_SWAP_DISTANCE_TO_BOUND_PER >= 2
 	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 20, 1000000, 5 #N.B. execute swaps only if abs(amount_to_swap_token0) > SWAP_EPSILON_PER / 100  * sum(tx_borrow_invested_token1) * price
-	assert MIN_SESSION_SWAP_PER * MIN_TX_BATCH_SWAP_PER > 1000000 #N.B. Only one swap type is allowed: either session or tx batch!
+	#assert MIN_SESSION_SWAP_PER * MIN_TX_BATCH_SWAP_PER > 1000000 #N.B. Only one swap type is allowed: either session or tx batch!
 	#DECREASE_ONLY_UNWIND_DIST_TIME_MIN = 30 #N.B.
 	#SWAP_FLOW_THRESHOLD_PER = 30
 	MAX_ATTEMPS_FAILED_TX = 5
