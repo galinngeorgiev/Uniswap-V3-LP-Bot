@@ -46,5 +46,7 @@ After an LP tx is fully round-tripped (after mint(), decreaseLiquidity(), collec
       i) Fail with error 'STF':
             - tx is not approved;
             - there are not enough tokens in the account, for swap();
+            - 
       ii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;
+      
       iii) 'Too little received' in swap(): when slippage is set too low
