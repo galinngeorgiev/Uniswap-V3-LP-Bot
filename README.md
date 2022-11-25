@@ -41,7 +41,7 @@ After an LP tx is fully round-tripped (after mint(), decreaseLiquidity(), collec
 
   To get the current NFT-s in the account, run: python "C:\...\UniswapV3_LP\toolbox.py" polygon address.
   
-  9. Errors:
+  9. Polygonscan  errors:
 
       i) Fail with error 'STF':
       
