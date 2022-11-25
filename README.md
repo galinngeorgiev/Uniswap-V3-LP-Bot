@@ -40,3 +40,11 @@ After an LP tx is fully round-tripped (after mint(), decreaseLiquidity(), collec
   - to only burn an NFT with a given tokenId. tokenId is required: python "C:\...\UniswapV3_LP\burn.py" tokenId polygon;
 
   To get the current NFT-s in the account, run: python "C:\...\UniswapV3_LP\toolbox.py" polygon address.
+  
+  9. Errors:
+
+      i) Fail with error 'STF':
+            - tx is not approved;
+            - there are not enough tokens in the account, for swap();
+      ii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;
+      iii) 'Too little received' in swap(): when slippage is set too low
