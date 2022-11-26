@@ -64,7 +64,8 @@ else:
 	DELAY_LOOP_SEC = 1
 	#N.B. If tx-s are pending too long, they usualy fail with  'Transaction too old'
 	#N.B. EXPIRY_SEC < 10 results usually in error 'Transaction too old'
-	EXPIRY_SEC, TIMEOUT_SEC = 60, 60 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
+	EXPIRY_SEC, TIMEOUT_SEC = 300, 60 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
+	assert EXPIRY_SEC >= TIMEOUT_SEC
 	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 	#N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
 	MAX_TX_IX, MIN_TOKEN1_QUANTITY = 10000, 0.05 #min block position, min token1 quantity of tx when computing current pool price
