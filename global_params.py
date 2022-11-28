@@ -30,8 +30,11 @@ if TEST:
 	MAX_PRICE_RETURN_PER = 10000000
 	#PRICE_MAD_WAIT_TIME_MIN = 0
 else:
+	#N.B. If token0 is borrowed, INIT_LP_POSITION_TO_INIT_PRICE = -1;
+	#N.B. If there is no additional same-size buy-and-hold when ETH is a ref frame (sell-and-hold when cash is the ref frame), CHANGE_LP_POSITION_TO_INIT_PRICE = False
+	INIT_LP_POSITION_TO_INIT_PRICE, CHANGE_LP_POSITION_TO_INIT_PRICE = 1, True
 	#N.B. NUM_LP >> 0 for the same total price range is beneficial because LP fee is convex & RL is concave: see Google docs > Crypto > Defi Swaps > Uniswap > LP > V3 price ranges: https://docs.google.com/document/d/1K83HF3-A9NqFKtjF-wcf6Kduz0r-J0yYchiyOCfaKgo/edit
-	NUM_LP, RUNTIME_SEC, INIT_LP_POSITION_TO_INIT_PRICE = 2, 300, -1 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+	NUM_LP, RUNTIME_SEC = 2, 300 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 	NUM_INVESTED_TOKEN1_LP = 0.01
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
