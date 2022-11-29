@@ -55,8 +55,12 @@ else:
 	MIN_POOL_LIQUIDITY_PER = [50, 50] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
 	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 1.5, 0.01, 0.1, 2 #N.B. Execute swaps with LP;
 	assert LP_SWAP_UNWIND_DISTANCE_PER /  LP_SWAP_DISTANCE_TO_BOUND_PER >= 2
-	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 1000000, 0.1, 0 #N.B. execute swaps only if abs(amount_to_swap_token0) > SWAP_EPSILON_PER / 100  * sum(tx_borrow_invested_token1) * price
-	assert MIN_SESSION_SWAP_PER * MIN_TX_BATCH_SWAP_PER >= 100000 #N.B. Only one swap type is allowed: either session or tx batch!
+	if CHANGE_LP_POSITION_TO_INIT_PRICE:
+        	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 5, 5, 5 #N.B. execute swaps only if abs(amount_to_swap) > SWAP_EPSILON_PER / 100  * NUM_INVESTED_TOKEN1_LP * price
+    	else:
+        	MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 50, 10, 5
+	#N.B. Make sure there is no token0 outstanding (after LP is collected) and causing  token0 collected p&l
+    	assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
 	#DECREASE_ONLY_UNWIND_DIST_TIME_MIN = 30 #N.B.
 	#SWAP_FLOW_THRESHOLD_PER = 30
 	MAX_ATTEMPS_FAILED_TX = 5
@@ -67,7 +71,7 @@ else:
 	#N.B. If tx is pending > EXPIRY_SEC (except for collect(), burn()), it usually fails with error 'Transaction too old'
 	EXPIRY_SEC, TIMEOUT_SEC = 300, 60 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity, swap; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
 	assert EXPIRY_SEC >= TIMEOUT_SEC
-	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 3000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
+	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 	#N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
 	MAX_TX_IX, MIN_TOKEN1_QUANTITY = 10000, 0.05 #min block position, min token1 quantity of tx when computing current pool price
 	MAX_PRICE_RETURN_PER = 1 #N.B. used in current_pool_price(): larger numbers result is bad prices! 
