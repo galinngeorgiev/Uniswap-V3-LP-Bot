@@ -13,7 +13,7 @@ if TEST:
 	#UNWIND_ASSET_RATIO_PER = 10
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 50, 50
 	PRICE_MAD = [100, 1000]
-	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = 10000, 10000
+	MIN_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = 10000, 10000
 	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 0, 0
 	MIN_POOL_LIQUIDITY_PER = [1000, 0]
 	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS = False, 2, 0.05, 0.25, 5
@@ -26,7 +26,7 @@ if TEST:
 	DELAY_LOOP_SEC = 10
 	EXPIRY_SEC, TIMEOUT_SEC = 60, 1800
 	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 10
-	MAX_TX_IX, MIN_TOKEN1_QUANTITY = 10000, 0
+	MAX_TX_IX, MIN_TOKEN1_VALUE = 10000, 0
 	MAX_PRICE_RETURN_PER = 10000000
 	#PRICE_MAD_WAIT_TIME_MIN = 0
 else:
@@ -50,7 +50,7 @@ else:
 	STOP_LOSS_BP, STOP_PROFIT_BP = 3, 10
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
 	PRICE_MAD = [10000., 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
-	MIN_INIT_TOKEN1_QUANTITY_TO_TVL_BP, MAX_UNWIND_TOKEN1_QUANTITY_TO_TVL_BP = -10000., 0.04 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
+	MIN_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = -10000., 60 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
 	MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 0, 0 #150, 5 
 	MIN_POOL_LIQUIDITY_PER = [50, 80] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
 	LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.25, 2 #N.B. Execute swaps with LP;
@@ -73,7 +73,7 @@ else:
 	assert EXPIRY_SEC >= TIMEOUT_SEC
 	MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 	#N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
-	MAX_TX_IX, MIN_TOKEN1_QUANTITY = 10000, 0.05 #min block position, min token1 quantity of tx when computing current pool price
+	MAX_TX_IX, MIN_TOKEN1_VALUE = 10000, 100 #min block position, min token1 quantity of tx when computing current pool price
 	MAX_PRICE_RETURN_PER = 1 #N.B. used in current_pool_price(): larger numbers result is bad prices! 
 	#PRICE_MAD_WAIT_TIME_MIN = 10
 
