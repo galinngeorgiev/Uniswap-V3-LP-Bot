@@ -47,7 +47,7 @@ else:
 	#	assert -UNWIND_DIST_TO_BOUND_PER[-1][0] >= (NUM_LP - 1) * 2 * max(LP_DISTANCE_TO_BOUND_PER) #N.B. Assure that there is no immediate unwinding!
 	#INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
 	#HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
-	STOP_LOSS_BP, STOP_PROFIT_BP = 3, 10
+	STOP_LOSS_BP, STOP_PROFIT_BP = 10, 10
 	MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
 	PRICE_MAD = [10000., 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
 	MIN_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = -10000., 60 #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
