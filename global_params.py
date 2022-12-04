@@ -43,7 +43,7 @@ else:
 	NUM_INVESTED_TOKEN1_LP = 1
 	#N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 	##UNWIND_ASSET_RATIO_PER = 80
-	LP_DISTANCE_TO_BOUND_PER = [0., 0.] #if 0., price range in minimum # ticks > 0, determined by pool fee; 2-nd is for begining-to-end of quiet hours, 1-st otherwise!
+	LP_DISTANCE_TO_BOUND_PER = [0., 0.] #if 0., price range is the minimum # ticks > 0, determined by the pool (fee); 2-nd entry is for begining-to-end of quiet hours, 1-st entry otherwise!
 	#N.B. Valid for LP_position_to_init_price = 1; if LP_position_to_init_price = -1, index of tuples is reverted!
 	UNWIND_DIST_TO_BOUND_PER = [(-0.50, 0.), (-0.70, 0.0), (-0.90, 0.0), (-1.10, 0.0), (-1.30, 0.0)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 	assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
