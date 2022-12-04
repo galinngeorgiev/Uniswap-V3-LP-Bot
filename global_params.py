@@ -74,7 +74,7 @@ else:
 	MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 2, 10
 	SLIPPAGE_PER, MAX_SLIPPAGE_PER = 1, 5 #N.B. If slippage is too low, get error 'Too little received'
 	DELAY_LOOP_SEC = 1
-	#N.B. If there is a different timeout for deadline  (after which, cancel) in mint, decreaseLiquidity, swap, it has to be >= TIMEOUT_SEC,
+	#N.B. If there is a different timeout for tx deadline  (after which, cancel) in mint, decreaseLiquidity, swap, it has to be >= TIMEOUT_SEC,
 	#N.B.  but if '>', two tx-s are executed very often: the 1-st (pending) tx often ececutes!
 	EXPIRY_SEC, TIMEOUT_SEC = 60, 60 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity, swap; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
 	assert EXPIRY_SEC >= TIMEOUT_SEC
