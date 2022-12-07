@@ -42,6 +42,8 @@ Parameters are in global_params.py (all global variables are capitalized): the b
             - there are not enough tokens in the account, for swap();
 
 
-      ii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;      
+      ii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;
+      
       iii) 'Too little received' in swap(): when slippage is set too low;
-      iv) 'Not cleared' in burn(): theare more tokens left;
+      
+      iv) 'Not cleared' in burn(): there are more tokens left i.e. the LP position still have some liquidity left;
