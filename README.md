@@ -29,7 +29,7 @@ Parameters are in global_params.py (all global variables are capitalized): the b
   - to completely unwind (a mint) tx. tokenID & liquidity are required - can be found under polygonscan.com > mint tx > logs > increaseLiquidity. One command runs all 3 separate functions (decreaseLiquidity(), collect() and burn()): python “C:\...\UniswapV3_LP\unwind.py" polygon tokenId liquidity
   - to only decrease liquidity. tokenID & liquidity are required (see above): python “C:\...\UniswapV3_LP\decreaseLiquidity.py" polygon tokenId liquidity
   - to only collect the funds (after decreaseLiquidity() is run). tokenId is required: python "C:\...\UniswapV3_LP\collect.py" tokenId polygon
-  - to only burn an NFT with a given tokenId. tokenId is required: python "C:\...\UniswapV3_LP\burn.py" tokenId polygon;
+  - to only burn an NFT with a given tokenId. tokenId is required: python "C:\...\UniswapV3_LP\burn.py" tokenId polygon; when a burn() returns error 'Not cleared', it is easier to remove the LP position from the Uniswap app and then burn the token with the above command!
 
   To get the current NFT-s in the account, run: python "C:\...\UniswapV3_LP\toolbox.py" polygon address.
   
