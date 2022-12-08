@@ -47,3 +47,5 @@ Parameters are in global_params.py (all global variables are capitalized): the b
       iii) 'Too little received' in swap(): when slippage is set too low;
       
       iv) 'Not cleared' in burn(): there are more tokens left i.e. the LP position still have some liquidity left;
+      
+      v) 'insufficient funds for gas * price + value': not enough token, used for gas (MATIC on Polygon)
