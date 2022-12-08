@@ -50,4 +50,4 @@ Parameters are in global_params.py (all global variables are capitalized): the b
       
       v) 'insufficient funds for gas * price + value': not enough token, used for gas (MATIC on Polygon)
       
-      vi) 'nonce too low': get it sometimes in swaps if i) nonce is None and const DELAY_NONCE_SEC is too small;
+      vi) 'nonce too low': get it sometimes in swaps if i) nonce is None and DELAY_NONCE_SEC in global_params.py is too small;
