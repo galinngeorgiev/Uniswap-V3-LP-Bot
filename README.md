@@ -48,6 +48,6 @@ Parameters are in global_params.py (all global variables are capitalized): the b
       
       iv) 'Not cleared' in burn(): there are more tokens left i.e. the LP position still have some liquidity left;
       
-      v) 'insufficient funds for gas * price + value': not enough tokens, used for gas (MATIC on Polygon), to cover gas parameters in global_params.py: MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS, MAX_GAS_UNITS
+      v) 'insufficient funds for gas * price + value': not enough tokens (typically < 20 MATIC on Polygon), used for gas, to cover gas parameters in global_params.py: MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS, MAX_GAS_UNITS;
       
       vi) 'nonce too low': get it sometimes in swaps if i) nonce is None and DELAY_NONCE_SEC in global_params.py is too small;
