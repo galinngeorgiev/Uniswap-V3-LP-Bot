@@ -19,9 +19,10 @@ Parameters are in global_params.py (all global variables are capitalized): the b
 
 6. When a blockchain tx fails MAX_ATTEMPTS_FAILED_TX ( 5 currently), the bot stops, so outstading mints have to be unwound manually - see below.
 
-7. A global flag LP_SWAP = True: avoids pool fee & slippage by executing an un-coventional swap via LP position (with the tightest possible price range). When LP_SWAP:
+7. A global flag LP_SWAP: avoids pool fee & slippage by executing an un-conventional swap via LP position (with the tightest possible price range). When LP_SWAP:
     i) the runtime may increase to max LP_SWAP_MULT_RUNTIME * RUNTIME;
    ii) when LP swap fails LP_SWAP_MAX_ATTEMPTS_FAILED_TX times or the extended end LP_SWAP_MULT_RUNTIME * RUNTIME_SEC is reached, conventional (non-LP) swap is executed.
+   But when LP_SWAP = True and ETH rallies hard, price 'runs away' from the LP swap price range, swaps are not executed promptly, and a huge negative p&l from buy-and-hold token0 (in ETH-reference-frame) is created! So, conservatively, LP_SWAP = False.
  
 8. Manual commands to unwind the LP positions:
 
