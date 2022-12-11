@@ -32,8 +32,6 @@ Parameters are in global_params.py (all global variables are capitalized): the b
   - to only collect the funds (after decreaseLiquidity() is run). tokenId is required: python "C:\...\UniswapV3_LP\collect.py" polygon tokenId
   - to only burn an NFT with a given tokenId. tokenId is required: python "C:\...\UniswapV3_LP\burn.py" polygon tokenId
 
-  To get the current NFT-s in the account, run: python "C:\...\UniswapV3_LP\toolbox.py" polygon address.
-  
   9. Polygonscan  errors:
 
       i) Fail with error 'STF':
