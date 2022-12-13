@@ -55,6 +55,7 @@ MAX_PRICE_RETURN_PER = 1 #N.B. used in current_pool_price(): larger numbers resu
 MAX_FEE_PER_GAS = int(1000e9) #N.B. Set to 1,000 Gwei the max amount of gas/unit (set to 100 Gwei on Ethereum, if I have only 0.1 ETH)
 MAX_PRIORITY_FEE_PER_GAS = int(30e9) #on Polygon the minimum that works is 30 Gwei/unit; on Ethereum 5 Gwei/unit works (the fee is gone)
 MAX_GAS_UNITS = int(1e6) #N.B. Decreasing this fails even for burn() on ethereum
+MAX_SUCCESS_TX_GAS_USED, MAX_FAILED_TX_GAS_USED = 10, 0.1
 DELAYED_ERR_NUM_ITERATIONS = 10
 NUM_OBSERVATIONS_MEDIAN, MAX_CARDINALITY_LIST = 30, 50
 assert MAX_CARDINALITY_LIST > NUM_OBSERVATIONS_MEDIAN
