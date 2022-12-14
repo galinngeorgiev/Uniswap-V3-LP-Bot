@@ -34,19 +34,23 @@ Parameters are in global_params.py (all global variables are capitalized): the b
 
   9. Polygonscan  errors:
 
-      i) Fail with error 'STF':
+      i) 'Fail with error 'STF'':
       
             - tx is not approved;
             - 
             - there are not enough tokens in the account, for swap();
+            - 
+            - 
+            - 
+      ii) 'Fail with error 'Not approved'': get it sometimes in decreaseLiquidity(); looks like a bug: was able to unwind from thr Uniswap.ork GUI;
 
 
-      ii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;
+      iii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;
       
-      iii) 'Too little received' in swap(): when slippage is set too low;
+      iv) 'Too little received' in swap(): when slippage is set too low;
       
-      iv) 'Not cleared' in burn(): there are more tokens left i.e. the LP position still have some liquidity left;
+      v) 'Not cleared' in burn(): there are more tokens left i.e. the LP position still have some liquidity left;
       
-      v) 'insufficient funds for gas * price + value': not enough tokens (typically < 20 MATIC on Polygon), used for gas, to cover gas parameters in global_params.py: MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS, MAX_GAS_UNITS;
+      vi) 'insufficient funds for gas * price + value': not enough tokens (typically < 20 MATIC on Polygon), used for gas, to cover gas parameters in global_params.py: MAX_FEE_PER_GAS, MAX_PRIORITY_FEE_PER_GAS, MAX_GAS_UNITS;
       
       vi) 'nonce too low': get it sometimes in swaps if i) nonce is None and DELAY_NONCE_SEC in global_params.py is too small;
