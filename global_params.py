@@ -153,7 +153,7 @@ if NODE_WEBSOCKET:
 #N.B. Logs of swap events are needed in order: 
 #N.B. i) to get a good pool price (sqrtPriceX96), without slippage, and 
 #N.B. ii) to get a good pool liquidity, and therefore good pool fees, therefore good stop-profit, stop-loss;
-EVENT_LOGS, PRICE_ALCHEMY = True, True
+EVENT_LOGS, PRICE_ALCHEMY, TOKEN_ALCHEMY = True, True, False
 
 
 #Node keys
