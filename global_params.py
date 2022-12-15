@@ -66,7 +66,7 @@ QUIET_HOURS_START, QUIET_HOURS_END = [5, 12], [7, 13]
 assert len(QUIET_HOURS_START) == len(QUIET_HOURS_END)
 PERIOD_CURRENT_LP_POSITIONS_ITERATIONS = 10
 assert int(RUNTIME_SEC / DELAY_LOOP_SEC) % PERIOD_CURRENT_LP_POSITIONS_ITERATIONS == 0
-DELAY_CHANGE_TOKEN_SEC, DELAY_NONCE_SEC, DELAY_REQUEST_SEC = 30, 3, 10
+DELAY_CHANGE_TOKEN_SEC, DELAY_NONCE_SEC, DELAY_REQUEST_SEC = 60, 3, 10
 EPSILON = 0.0001 #N.B. used in asset_ratio_01; 
 
 #############################################
@@ -152,7 +152,7 @@ if NODE_WEBSOCKET:
 #N.B. Logs of swap events are needed in order: 
 #N.B. i) to get a good pool price (sqrtPriceX96), without slippage, and 
 #N.B. ii) to get a good pool liquidity, and therefore good pool fees, therefore good stop-profit, stop-loss;
-EVENT_LOGS, PRICE_ALCHEMY, TOKEN_ALCHEMY = True, True, False
+EVENT_LOGS, PRICE_ALCHEMY, TOKEN_ALCHEMY = True, True, True
 
 
 #Node keys
