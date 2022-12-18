@@ -39,12 +39,12 @@ assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
 #SWAP_FLOW_THRESHOLD_PER = 30
 MAX_ATTEMPS_FAILED_TX, MAX_ATTEMPS_FAILED_PRICE, MAX_ATTEMPS_FAILED_TOKEN = 5, 200, 5
 assert MAX_ATTEMPS_FAILED_TX > LP_SWAP_MAX_ATTEMPTS_FAILED_TX
-MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 2, 10
+MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 1.5, 5
 SLIPPAGE_PER, MAX_SLIPPAGE_PER = 1, 5 #N.B. If slippage is too low, get error 'Too little received'
 DELAY_LOOP_SEC = 1
 #N.B. If there is a different timeout for tx deadline  (after which, cancel) in mint, decreaseLiquidity, swap, it has to be >= TIMEOUT_SEC,
 #N.B.  but if '>', two tx-s are executed very often: the 1-st (pending) tx often ececutes!
-EXPIRY_SEC, TIMEOUT_SEC, MINT_EXPIRY_SEC, MINT_TIMEOUT_SEC = 60, 60, 180, 180 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity, swap; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
+EXPIRY_SEC, TIMEOUT_SEC, MINT_EXPIRY_SEC, MINT_TIMEOUT_SEC = 30, 30, 180, 180 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity, swap; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
 assert EXPIRY_SEC >= TIMEOUT_SEC
 MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 #N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
