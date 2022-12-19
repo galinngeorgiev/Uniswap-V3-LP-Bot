@@ -38,11 +38,11 @@ Parameters are in global_params.py (all global variables are capitalized): the b
       
             - tx is not approved;
             - 
-            - there are not enough tokens in the account, for mint(), swap();
+            - there are not enough tokens in the account, in mint(), swap();
             - 
             - 
             - 
-      ii) 'Fail with error 'Not approved'': get it sometimes in decreaseLiquidity(); looks like a bug: was able to unwind from thr Uniswap.ork GUI;
+      ii) 'Fail with error 'Not approved'': get it sometimes in decreaseLiquidity(); looks like a bug: was able to unwind from thr Uniswap.org GUI;
 
 
       iii) 'Transaction too old' in any tx: when pending tx time > EXPIRY_SEC or EXPIRY_SEC is <= 5;
