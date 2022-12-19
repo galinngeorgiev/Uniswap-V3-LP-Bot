@@ -23,8 +23,8 @@ assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 STOP_LOSS_BP, STOP_PROFIT_BP = 10, 10
 MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
 PRICE_MAD = [0.0001, 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
-MIN_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = 60., 60. #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
-MIN_INIT_AFTER_BLOCKS, MIN_INIT_AFTER_PRICE_RET_BP = 150, 5 
+MAX_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = 60., 60. #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
+MIN_INIT_AFTER_BLOCKS, MAX_INIT_AFTER_PRICE_RET_BP = 150, 50
 MIN_POOL_LIQUIDITY_PER = [50, 80] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
 if CHANGE_LP_POSITION_TO_INIT_PRICE:
         MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 5, 5, 5 #N.B. execute swaps only if abs(amount_to_swap) > SWAP_EPSILON_PER / 100  * NUM_INVESTED_TOKEN1_LP * price
