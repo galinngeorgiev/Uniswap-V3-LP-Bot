@@ -22,9 +22,9 @@ assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 #HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
 STOP_LOSS_BP, STOP_PROFIT_BP = 10, 10
 MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
-PRICE_MAD = [0.0001, 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
+PRICE_MAD = [0.0004, 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
 MAX_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = 60., 60. #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
-MIN_INIT_AFTER_BLOCKS, MAX_INIT_AFTER_PRICE_RET_BP = 150, 50
+MIN_INIT_AFTER_BLOCKS, MAX_INIT_AFTER_PRICE_RET_BP = 100, 50
 MIN_POOL_LIQUIDITY_PER = [50, 80] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
 if CHANGE_LP_POSITION_TO_INIT_PRICE:
         MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 5, 5, 5 #N.B. execute swaps only if abs(amount_to_swap) > SWAP_EPSILON_PER / 100  * NUM_INVESTED_TOKEN1_LP * price
@@ -48,7 +48,7 @@ EXPIRY_SEC, TIMEOUT_SEC, MINT_EXPIRY_SEC, MINT_TIMEOUT_SEC = 30, 30, 180, 180 #N
 assert EXPIRY_SEC >= TIMEOUT_SEC
 MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 #N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
-MAX_TX_IX, MIN_TOKEN1_VALUE = 5, 100 #min block position, min token1 quantity of tx when computing current pool price
+MAX_TX_IX, MIN_TOKEN1_VALUE = 1, 100 #min block position, min token1 quantity of tx when computing current pool price
 MAX_PRICE_RETURN_PER = 1 #N.B. used in current_pool_price(): larger numbers result is bad prices! 
 #PRICE_MAD_WAIT_TIME_MIN = 10
 
