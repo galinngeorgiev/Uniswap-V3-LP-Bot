@@ -11,7 +11,7 @@ The bot LP positions are stacked to the 'right' of the current ETH price, so the
 3. The account has to have no NFT-s, in order for the bot to run. NFT-s are burned with burn() - see manual commands below. If all tokens are not collected first (after decreaseLiquidity() on the full liquidity), burn() tx produces error on Polygonscan "Fail with error 'Not cleared'". The ABI-s of the contracts used (all of them on the blockchain, made by Uniswap) are in the subdir /abi.
 
  
-4. A session lasts for RUNTIME_SEC (=72000 iterations currently i.e. when  ~ 24 hours when DELAY_LOOP_SEC = 1).  
+4. A session lasts for RUNTIME_ITERATIONS / DELAY_LOOP_SEC = 1.
 
 Parameters are in global_params.py (all global variables are capitalized): the bot initiates NUM_LP LP positions for a total NUM_INVESTED_TOKEN1_LP ETH, each with price range 2 * LP_DISTANCE_TO_BOUND_PER wide, stacked adjacently to the right of the initiation ETH price (LP_position_to_init_price[:NUM_LP] = 1). The bot liquidates them when they are UNWIND_DISTANCE_TO_BOUND_PER  OTM or at the end of the session or on some other conditions.
     
