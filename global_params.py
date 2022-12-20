@@ -7,13 +7,13 @@ TEST = False
 #N.B. If there is no additional same-size buy-and-hold when ETH is a ref frame (sell-and-hold when cash is the ref frame), CHANGE_LP_POSITION_TO_INIT_PRICE = False but it does not work well in an up-directional market!
 INIT_LP_POSITION_TO_INIT_PRICE, CHANGE_LP_POSITION_TO_INIT_PRICE = 1, True
 #N.B. NUM_LP >> 0 for the same total price range is beneficial because LP fee is convex & RL is concave: see Google docs > Crypto > Defi Swaps > Uniswap > LP > V3 price ranges: https://docs.google.com/document/d/1K83HF3-A9NqFKtjF-wcf6Kduz0r-J0yYchiyOCfaKgo/edit
-NUM_LP, RUNTIME_SEC = 10, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
-NUM_INVESTED_TOKEN1_LP = 1
+NUM_LP, RUNTIME_SEC = 5, 144000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+NUM_INVESTED_TOKEN1_LP = 10
 #N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 ##UNWIND_ASSET_RATIO_PER = 80
 LP_DISTANCE_TO_BOUND_PER,  LP_BOUND_DISTANCE_TO_CURRENT_PER = [0., 0.], 0.5 #if 0., price range is the minimum # ticks > 0, determined by the pool (fee); 2-nd entry is for begining-to-end of quiet hours, 1-st entry otherwise!
 #N.B. Valid for LP_position_to_init_price = 1; if LP_position_to_init_price = -1, index of tuples is reverted!
-UNWIND_DIST_TO_BOUND_PER = [(-0.50, 0.), (-0.70, 0.0), (-0.90, 0.0), (-1.10, 0.0), (-1.30, 0.0)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+UNWIND_DIST_TO_BOUND_PER = [(-0.6, 0.), (-0.8, 0.0), (-1.0, 0.0), (-1.2, 0.0), (-1.4, 0.0)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 #N.B. Make sure that LP tx does not unwind immediately!
 #if NUM_LP > 1:
@@ -22,7 +22,7 @@ assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 #HEDGE_RL, HEDGE_RL_THRESHOLD_BP = False, 0.05
 STOP_LOSS_BP, STOP_PROFIT_BP = 10, 10
 MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
-PRICE_MAD = [0.0004, 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
+PRICE_MAD = [0.0002, 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
 MAX_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = 60., 60. #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
 MIN_INIT_AFTER_BLOCKS, MAX_INIT_AFTER_PRICE_RET_BP = 100, 50
 MIN_POOL_LIQUIDITY_PER = [50, 80] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
@@ -31,8 +31,8 @@ if CHANGE_LP_POSITION_TO_INIT_PRICE:
         LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.25, 2
 else:
         MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 20, 10, 5
-        LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.25, 1
-assert LP_SWAP_UNWIND_DISTANCE_PER /  LP_SWAP_DISTANCE_TO_BOUND_PER >= 2
+        LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.1, 1
+assert LP_SWAP_UNWIND_DISTANCE_PER >=  LP_SWAP_DISTANCE_TO_BOUND_PER
 #N.B. Make sure there is no token0 outstanding (after LP is collected) and causing  token0 collected p&l
 assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
 #DECREASE_ONLY_UNWIND_DIST_TIME_MIN = 30 #N.B.
@@ -41,7 +41,7 @@ MAX_ATTEMPS_FAILED_TX, MAX_ATTEMPS_FAILED_PRICE, MAX_ATTEMPS_FAILED_TOKEN = 5, 1
 assert MAX_ATTEMPS_FAILED_TX > LP_SWAP_MAX_ATTEMPTS_FAILED_TX
 INIT_MULT_GAS_FACTOR_REPLACE, MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 2, 1.5, 5
 INIT_SLIPPAGE_PER, SLIPPAGE_STEP_PER, MAX_SLIPPAGE_PER = 2, 1, 5 #N.B. If slippage is too low, get error 'Too little received'
-DELAY_LOOP_SEC = 1
+DELAY_LOOP_SEC = 0.5
 #N.B. If there is a different timeout for tx deadline  (after which, cancel) in mint, decreaseLiquidity, swap, it has to be >= TIMEOUT_SEC,
 #N.B.  but if '>', two tx-s are executed very often: the 1-st (pending) tx often ececutes!
 EXPIRY_SEC, TIMEOUT_SEC, MINT_EXPIRY_SEC, MINT_TIMEOUT_SEC = 30, 30, 180, 180 #N.B. 1st is used for deadline (after which, cancel) in mint, decreaseLiquidity, swap; 2nd is used in .wait_for_transaction_receipt (if TIMEOUT_SEC=0,  w3.eth.wait_for_transaction_receipt returns error TimeExhausted)
