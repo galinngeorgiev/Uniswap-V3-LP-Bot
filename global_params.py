@@ -7,7 +7,7 @@ TEST = False
 #N.B. If there is no additional same-size buy-and-hold when ETH is a ref frame (sell-and-hold when cash is the ref frame), CHANGE_LP_POSITION_TO_INIT_PRICE = False but it does not work well in an up-directional market!
 INIT_LP_POSITION_TO_INIT_PRICE, CHANGE_LP_POSITION_TO_INIT_PRICE = 1, True
 #N.B. NUM_LP >> 0 for the same total price range is beneficial because LP fee is convex & RL is concave: see Google docs > Crypto > Defi Swaps > Uniswap > LP > V3 price ranges: https://docs.google.com/document/d/1K83HF3-A9NqFKtjF-wcf6Kduz0r-J0yYchiyOCfaKgo/edit
-NUM_LP, RUNTIME_ITERATIONS = 5, 144000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+NUM_LP, RUNTIME_SEC = 5, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 NUM_INVESTED_TOKEN1_LP = 10
 #N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 ##UNWIND_ASSET_RATIO_PER = 80
@@ -65,7 +65,7 @@ assert MAX_CARDINALITY_LIST > NUM_OBSERVATIONS_MEDIAN
 QUIET_HOURS_START, QUIET_HOURS_END = [5, 12], [7, 13]
 assert len(QUIET_HOURS_START) == len(QUIET_HOURS_END)
 PERIOD_CURRENT_LP_POSITIONS_ITERATIONS = 10
-assert int(RUNTIME_ITERATIONS / DELAY_LOOP_SEC) % PERIOD_CURRENT_LP_POSITIONS_ITERATIONS == 0
+assert int(RUNTIME_SEC / DELAY_LOOP_SEC) % PERIOD_CURRENT_LP_POSITIONS_ITERATIONS == 0
 DELAY_CHANGE_TOKEN_SEC, DELAY_NONCE_SEC, DELAY_REQUEST_SEC = 60, 3, 10
 EPSILON = 0.0001 #N.B. used in asset_ratio_01; 
 
