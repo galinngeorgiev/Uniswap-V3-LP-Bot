@@ -7,13 +7,13 @@ TEST = False
 #N.B. If there is no additional same-size buy-and-hold when ETH is a ref frame (sell-and-hold when cash is the ref frame), CHANGE_LP_POSITION_TO_INIT_PRICE = False but it does not work well in an up-directional market!
 INIT_LP_POSITION_TO_INIT_PRICE, CHANGE_LP_POSITION_TO_INIT_PRICE = 1, True
 #N.B. NUM_LP >> 0 for the same total price range is beneficial because LP fee is convex & RL is concave: see Google docs > Crypto > Defi Swaps > Uniswap > LP > V3 price ranges: https://docs.google.com/document/d/1K83HF3-A9NqFKtjF-wcf6Kduz0r-J0yYchiyOCfaKgo/edit
-NUM_LP, RUNTIME_SEC = 5, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
+NUM_LP, RUNTIME_SEC = 3, 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 NUM_INVESTED_TOKEN1_LP = 10
 #N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 ##UNWIND_ASSET_RATIO_PER = 80
 LP_DISTANCE_TO_BOUND_PER,  LP_BOUND_DISTANCE_TO_CURRENT_PER = [0., 0.], 0.5 #if 0., price range is the minimum # ticks > 0, determined by the pool (fee); 2-nd entry is for begining-to-end of quiet hours, 1-st entry otherwise!
 #N.B. Valid for LP_position_to_init_price = 1; if LP_position_to_init_price = -1, index of tuples is reverted!
-UNWIND_DIST_TO_BOUND_PER = [(-0.6, 0.), (-0.8, 0.0), (-1.0, 0.0), (-1.2, 0.0), (-1.4, 0.0)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
+UNWIND_DIST_TO_BOUND_PER = [(-0.6, 0.), (-0.8, 0.0), (-1.0, 0.0)] #N.B. Unwind j-th tx if its dist-to-...-bound < dist-to-...-bound; greater in abs value UNWIND_DIST_TO_BOUND_PER do not incure OTM loss!
 assert len(UNWIND_DIST_TO_BOUND_PER) == NUM_LP
 #N.B. Make sure that LP tx does not unwind immediately!
 #if NUM_LP > 1:
