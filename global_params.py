@@ -31,7 +31,7 @@ if CHANGE_LP_POSITION_TO_INIT_PRICE:
         LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.25, 2
 else:
         MIN_SESSION_SWAP_PER, MIN_TX_BATCH_SWAP_PER, SWAP_EPSILON_PER = 20, 10, 5
-        LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.1, 1
+        LP_SWAP, LP_SWAP_MULT_RUNTIME, LP_SWAP_DISTANCE_TO_BOUND_PER, LP_SWAP_UNWIND_DISTANCE_PER, LP_SWAP_MAX_ATTEMPTS_FAILED_TX = True, 2, 0.1, 0.2, 1
 assert LP_SWAP_UNWIND_DISTANCE_PER >=  LP_SWAP_DISTANCE_TO_BOUND_PER
 #N.B. Make sure there is no token0 outstanding (after LP is collected) and causing  token0 collected p&l
 assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
@@ -40,7 +40,7 @@ assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
 MAX_ATTEMPS_FAILED_TX, MAX_ATTEMPS_FAILED_PRICE, MAX_ATTEMPS_FAILED_TOKEN = 5, 100, 5
 assert MAX_ATTEMPS_FAILED_TX > LP_SWAP_MAX_ATTEMPTS_FAILED_TX
 INIT_MULT_GAS_FACTOR_REPLACE, MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 3, 1.5, 5
-INIT_SLIPPAGE_PER, SLIPPAGE_STEP_PER, MAX_SLIPPAGE_PER = 2, 1, 5 #N.B. If slippage is too low, get error 'Too little received'
+INIT_SLIPPAGE_PER, SLIPPAGE_STEP_PER, MAX_SLIPPAGE_PER = 3, 1, 5 #N.B. If slippage is too low, get error 'Too little received'
 DELAY_LOOP_SEC = 0.5
 #N.B. If there is a different timeout for tx deadline  (after which, cancel) in mint, decreaseLiquidity, swap, it has to be >= TIMEOUT_SEC,
 #N.B.  but if '>', two tx-s are executed very often: the 1-st (pending) tx often ececutes!
