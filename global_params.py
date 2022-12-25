@@ -41,7 +41,7 @@ assert MIN_TX_BATCH_SWAP_PER / 100 < 1 / NUM_LP
 MAX_ATTEMPS_FAILED_TX, MAX_ATTEMPS_FAILED_PRICE, MAX_ATTEMPS_FAILED_TOKEN = 5, 100, 5
 assert MAX_ATTEMPS_FAILED_TX > LP_SWAP_MAX_ATTEMPTS_FAILED_TX
 INIT_MULT_GAS_FACTOR_REPLACE, MULT_GAS_FACTOR_REPLACE, MAX_MULT_FACTOR_GAS_REPLACE = 1, 1.5, 5
-INIT_SLIPPAGE_PER, SLIPPAGE_STEP_PER, MAX_SLIPPAGE_PER = 2, 1, 5 #N.B. If slippage is too low, get error 'Too little received'
+INIT_SLIPPAGE_PER, SLIPPAGE_STEP_PER, MAX_SLIPPAGE_PER = 1, 1, 5 #N.B. If slippage is too low, get error 'Too little received'
 DELAY_LOOP_SEC = 0.5
 #N.B. If there is a different timeout for tx deadline  (after which, cancel) in mint, decreaseLiquidity, swap, it has to be >= TIMEOUT_SEC,
 #N.B.  but if '>', two tx-s are executed very often: the 1-st (pending) tx often executes!
