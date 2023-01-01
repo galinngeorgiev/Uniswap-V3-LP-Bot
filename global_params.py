@@ -86,6 +86,9 @@ ADDRESS_TESTNET = '0x81f991E9d7a2bd2146Cc68F831f806187eA9b5ae'
 
 #N.B. Get the private key string from wallet acct
 PRIVATE_KEY = '172e6be936e1151c7d8fc448e0e27007f4a0d93f4cf1ecbc3c926a07d6ab6448' #testnets
+
+#################
+CEX_PRODUCT_ID = 'ETH-USD'
  
 #################
 #N.B. Uniswap v3 networks, tokens, pools
