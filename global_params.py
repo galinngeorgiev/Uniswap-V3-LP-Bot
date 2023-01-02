@@ -22,6 +22,7 @@ STOP_LOSS_BP, STOP_PROFIT_BP = 10, 10
 MIN_UNWIND_SWAP_VOLUME_TOKEN1, MIN_UNWIND_SWAP_FLOW_PER = 10000, 10000
 PRICE_MAD = [0.0002, 0., 0.0004] #N.B. 1st is max for a new LP position, 2nd is min for hedging RL, last is max for unwinding the LP position
 MAX_INIT_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP, MAX_UNWIND_TOKEN1_VALUE_TO_POOL_LIQUIDITY_BP = 60., 60. #N.B. 1st in min for a new LP position; 2nd is max for unwinding LP position;
+MAX_RET_CEFI_DEFI_PER = 0.2
 MIN_INIT_AFTER_BLOCKS, MAX_INIT_AFTER_PRICE_RET_BP = 100, 50
 MIN_POOL_LIQUIDITY_PER = [50, 80] #N.B. 1st is min for a new LP position (w.r.t pool liq median), 2nd is min for unwinding the LP position;
 if CHANGE_LP_POSITION_TO_INIT_PRICE:
