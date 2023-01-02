@@ -51,6 +51,7 @@ MAX_TX_IX, MIN_TOKEN1_VALUE = 1, 100 #min block position, min token1 quantity of
 MAX_PRICE_RETURN_PER = 1 #N.B. used in current_pool_price(): larger numbers result is bad prices! 
 #PRICE_MAD_WAIT_TIME_MIN = 10
 
+GAS_EXT = True
 MAX_FEE_PER_GAS = int(1000e9) #N.B. Set to 1,000 Gwei the max amount of gas/unit (set to 100 Gwei on Ethereum, if I have only 0.1 ETH)
 MAX_PRIORITY_FEE_PER_GAS = int(30e9) #on Polygon the minimum that works is 30 Gwei/unit; on Ethereum 5 Gwei/unit works (the fee is gone)
 MAX_GAS_UNITS = int(1e6) #N.B. Decreasing this fails even for burn() on ethereum
