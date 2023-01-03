@@ -90,7 +90,8 @@ ADDRESS_TESTNET = '0x81f991E9d7a2bd2146Cc68F831f806187eA9b5ae'
 PRIVATE_KEY = '172e6be936e1151c7d8fc448e0e27007f4a0d93f4cf1ecbc3c926a07d6ab6448' #testnets
 
 #################
-CEX_PRODUCT_ID = 'ETH-USD'
+CEX, CEX_SYMBOL = 'Binance', 'ETHUSDC'
+#CEX, CEX_SYMBOL = 'Coinbase', 'ETH-USD'
  
 #################
 #N.B. Uniswap v3 networks, tokens, pools
