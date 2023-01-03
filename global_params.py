@@ -13,7 +13,7 @@ NUM_INVESTED_TOKEN1_LP = 10
 #N.B. UNWIND_DIST_TO_BOUND_PER is more robust than UNWIND_ASSET_RATIO_PER because the distance does not depend on price_LP (which could be very different than API pool prices)
 ##UNWIND_ASSET_RATIO_PER = 80
 LP_DISTANCE_TO_BOUND_PER = [0., 0.] #if 0., price range is the minimum # ticks given by the pool; 2-nd entry in the list is for begining-to-end of quiet hours, 1-st entry in list otherwise!
-LP_BOUND_DISTANCE_TO_CURRENT_PER =  [0.15, 0.6] #min (1st): if less, mint() often fails; and max (2nd) of lp_bound_distance_to_current_per
+LP_BOUND_DISTANCE_TO_CURRENT_PER =  [0.2, 0.6] #min (1st): if less, mint() often fails; and max (2nd) of lp_bound_distance_to_current_per
 #N.B. Valid for LP_position_to_init_price = 1; if LP_position_to_init_price = -1, the pair has to be reversed when forming a tuple !
 LP_UNWIND_DISTANCE_TO_LOWER_BOUND_DECREASE_PER, LP_UNWIND_DIST_TO_UPPER_BOUND_PER = 0.2, 0.
 #INCREASE_LIQUIDITY = False #N.B. This flag is for increaseLiquidity() without mint(); not working properly: after execution, has to goes straight to mint(), without decreaseLiquidity() but not otherwise!
