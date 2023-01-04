@@ -49,7 +49,7 @@ assert EXPIRY_SEC >= TIMEOUT_SEC
 MAX_QUANTITY0_SWAP_ITERATION, DELAY_SWAP_ITERATION_SEC = 1000, 5 #N.B. Swap size-splitting assumes that token0 price ~ 1
 #N.B. The min of Quantity1 for WMATIC/WETH Uniswap v3 Polygon pools (data from Jan to Jun 2022) is reached at 0.5 WETH!
 MAX_TX_IX, MIN_TOKEN1_VALUE = 5, 100 #min block position, min token1 quantity of tx when computing current pool price
-MAX_PRICE_RETURN_PER = 3 #N.B. used in current_pool_price(): larger numbers result is bad prices! 
+MAX_PRICE_RETURN_PER = 3 #N.B. used in current_price(): larger numbers result is bad pool prices! 
 #PRICE_MAD_WAIT_TIME_MIN = 10
 
 GAS_EXT = True
