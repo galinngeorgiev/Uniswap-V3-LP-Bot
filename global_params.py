@@ -5,7 +5,7 @@ TEST = False
 
 #N.B. If token0 is borrowed, INIT_LP_POSITION_TO_INIT_PRICE = -1;
 #N.B. If there is no additional same-size buy-and-hold when ETH is a ref frame (sell-and-hold when cash is the ref frame), CHANGE_LP_POSITION_TO_INIT_PRICE = False but it does not work well in an up-directional market!
-INIT_LP_POSITION_TO_INIT_PRICE, CHANGE_LP_POSITION_TO_INIT_PRICE = 1, True
+INIT_LP_POSITION_TO_INIT_PRICE, CHANGE_LP_POSITION_TO_INIT_PRICE = 1, False
 RUNTIME_SEC = 72000 #N.B. Running time of the loop (loop runs longer because tx executions take time)
 #N.B. NUM_LP >> 0 for the same total price range is beneficial because LP fee is convex & RL is concave: see Google docs > Crypto > Defi Swaps > Uniswap > LP > V3 price ranges: https://docs.google.com/document/d/1K83HF3-A9NqFKtjF-wcf6Kduz0r-J0yYchiyOCfaKgo/edit
 NUM_LP, MAX_TIMES_INCREASE_NUM_LP RUNTIME_SEC = 3, 1
